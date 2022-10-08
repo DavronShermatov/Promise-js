@@ -3,13 +3,6 @@
 const isFrendCome =  false
 
 const meetingRequest = new Promise((relosve, reject)=>{
-    if(isFrendCome){
-        const msg = "Frend I'm there"
-        resolve()
-    }else{
-        const err  = "I can't come there"
-        reject(err)
-    }
 })
 
 meetingRequest.then((msg)=> console.log(msg))
@@ -41,3 +34,18 @@ request
     })
     .then((result)=>console.log(result))
     .finally(()=>console.log('Fetching end'))
+
+const requests = (time)=>{
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            resolve()
+        }, time)
+    })
+}
+
+requests(1000).then(()=>console.log('request 1000ms'))
+requests(2000).then(()=>console.log('request 2000ms'))
+requests(3000).then(()=>console.log('request 3000ms'))
+
+Promise.all([requests(1000), requests(2000), requests(3000)]).then(()=>console.log('All'))
+Promise.race([requests(1000), requests(2000), requests(3000)]).then(()=>console.log('race'))
